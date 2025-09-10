@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview</title>
+    <!-- Usa url_for para enlazar el archivo CSS en la carpeta static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Imágenes</h1>
+    <div class="image-section">
+        <h2>Original</h2>
+        <img src="data:image/png;base64,{{ original_img }}" alt="Imagen Original" class="preview-image">
+    </div>
+    <div class="image-section">
+        <h2>Encriptada</h2>
+        <img src="data:image/png;base64,{{ encripted_img }}" alt="Imagen Encriptada" class="preview-image">
+        <a href="{{ url_for('download_image', image_path='imagen_oculta.png') }}" download="imagen_encriptada.png" class="download-link">Descargar Imagen</a>
+    </div>
+
+    <h1>Matrices Numéricas</h1>
+    <div class="matrix-section">
+        <h2>Matriz Original</h2>
+        <pre class="matrix">{{ original_matriz }}</pre>
+    </div>
+    <div class="matrix-section">
+        <h2>Matriz Encriptada</h2>
+        <pre class="matrix">{{ encripted_matriz }}</pre>
+    </div>
+</body>
+</html>

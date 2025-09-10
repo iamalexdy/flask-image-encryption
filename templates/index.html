@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esteganografía con 3DES y Fernet</title>
+</head>
+<body>
+    <h1>Ocultar y Extraer Texto en Imágenes</h1>
+
+    <!-- Formulario para ocultar mensaje -->
+    <h2>Ocultar Mensaje</h2>
+    <form id="ocultar-form" method="POST" action="/upload" enctype="multipart/form-data">
+        <label for="file">Selecciona una imagen:</label>
+        <input type="file" name="file" id="file" required>
+        <br>
+        <label for="texto">Mensaje a ocultar:</label>
+        <input type="text" name="texto" required>
+        <br>
+        <label for="cifrado">Método de Encriptación:</label>
+        <select name="cifrado" required>
+            <option value="3des">3DES</option>
+            <option value="fernet">Fernet</option>
+        </select>
+        <br>
+        <button type="submit">Ocultar Mensaje</button>
+    </form>
+
+    <!-- Formulario para extraer mensaje -->
+    <h2>Extraer Mensaje</h2>
+    <form id="extraer-form" method="POST" action="/extract" enctype="multipart/form-data">
+        <label for="file">Selecciona una imagen encriptada:</label>
+        <input type="file" name="file" required>
+        <br>
+        <label for="cifrado">Método de Encriptación:</label>
+        <select name="cifrado" required>
+            <option value="3des">3DES</option>
+            <option value="fernet">Fernet</option>
+        </select>
+        <br>
+        <button type="submit">Extraer Mensaje</button>
+    </form>
+
+    <script>
+        document.getElementById('extraer-form').onsubmit = async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const response = await fetch('/extract', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            alert(`Mensaje extraído: ${data.texto}`);
+        };
+    </script>
+
+</body>
+</html>
