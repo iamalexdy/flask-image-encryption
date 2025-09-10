@@ -43,7 +43,7 @@ http://127.0.0.1:5000 o el que indique la terminal
 ```
 Esteganografia/
 │── app.py
-│── requirements.txt
+│── readme.md
 │── templates/
 │   ├── index.html
 │   └── preview.html
